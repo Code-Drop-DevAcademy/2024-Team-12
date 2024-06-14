@@ -8,5 +8,7 @@
 import Foundation
 
 enum StringLiterals {
-    
+    enum StarImage: String, CaseIterable {
+        case GreenStar, OrangeStar, YellowStar, PinkStar
+    }
 }

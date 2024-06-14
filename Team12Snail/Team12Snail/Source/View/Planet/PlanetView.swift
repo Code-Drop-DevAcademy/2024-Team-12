@@ -12,24 +12,31 @@ struct PlanetView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var items: [Item]
     @State var selectedIndex: Int = 0
+    @State var showRegisterSheet: Bool = false
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            PlanetImage
-            StarSelectingView(selectedIndex: $selectedIndex)
-                .padding(.bottom, 30)
-                .overlay {
-                    ChangeStarButton
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                PlanetImage
+                StarSelectingView(selectedIndex: $selectedIndex, showRegisterSheet: $showRegisterSheet)
+                    .padding(.bottom, 30)
+                    .overlay {
+                        ChangeStarButton
+                    }
+            }
+            .overlay(alignment: .topTrailing) {
+                ShoppingButton
+                    .padding()
+                    .padding(.top, 24)
+            }
+            .onAppear {
+                // 현재는 임시로 뷰 생성시 Items 임의로 생성되게 설정
+                if items.isEmpty {
+                    initItems()
                 }
-        }
-        .overlay(alignment: .topTrailing) {
-            ShoppingButton
-                .padding()
-        }
-        .onAppear {
-            // 현재는 임시로 뷰 생성시 Items 임의로 생성되게 설정
-            if items.isEmpty {
-                initItems()
+            }
+            .sheet(isPresented: $showRegisterSheet) {
+                TaskRegisterView(selectedIndex: $selectedIndex)
             }
         }
     }
@@ -55,6 +62,7 @@ extension PlanetView {
                 Image(systemName: "chevron.left")
                     .font(.largeTitle)
                     .shadow(radius: 4, y: 4)
+                    .padding()
             }
             .tint(.white)
             Spacer()
@@ -66,10 +74,11 @@ extension PlanetView {
                 Image(systemName: "chevron.right")
                     .font(.largeTitle)
                     .shadow(radius: 4, y: 4)
+                    .padding()
             }
             .tint(.white)
         }
-        .padding(16)
+        .padding(8)
     }
     
     var ShoppingButton: some View {
@@ -78,15 +87,16 @@ extension PlanetView {
         } label: {
             Image(systemName: "storefront.circle.fill")
                 .resizable()
-                .frame(width: 48, height: 48)
+                .frame(width: 40, height: 40)
                 .foregroundStyle(.black)
+                .padding(8)
         }
     }
 }
 
-#Preview {
-    PlanetView()
-}
+//#Preview {
+//    PlanetView()
+//}
 
 extension PlanetView {
     

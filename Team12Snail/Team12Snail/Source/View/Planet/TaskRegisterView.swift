@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TaskRegisterView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State var selectedIndex: Int = 0
+    @Query var items: [Item]
+    @Binding var selectedIndex: Int
     @State var taskTitleText: String = ""
     @State var taskCase: Int = 0
     
@@ -47,11 +48,11 @@ extension TaskRegisterView {
             Spacer()
             
             VStack(spacing: 4) {
-                Image(.greenStar)
+                Image(StringLiterals.StarImage.allCases[selectedIndex].rawValue)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .frame(width: 45, height: 45)
-                Text("마케팅 실력 향상")
+                Text(items.first?.starName[selectedIndex] ?? "Error")
             }
             .padding(.top, 10)
             .padding(.bottom, 20)
@@ -128,6 +129,6 @@ extension TaskRegisterView {
     }
 }
 
-#Preview {
-    TaskRegisterView()
-}
+//#Preview {
+//    TaskRegisterView()
+//}

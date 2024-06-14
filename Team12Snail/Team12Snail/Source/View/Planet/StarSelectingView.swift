@@ -6,33 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct StarSelectingView: View {
+    @Query var items: [Item]
+    
     @Binding var selectedIndex: Int
+    @Binding var showRegisterSheet: Bool
     
     var body: some View {
         TabView(selection: $selectedIndex) {
             ForEach(0..<4, id: \.self) { index in
                 VStack(spacing: 24) {
                     Button {
-                        print("show TaskView \(index)")
+                        showRegisterSheet = true
+                        selectedIndex = index
                     } label: {
                         ZStack {
-                            Image(systemName: "star.fill")
+                            Image(StringLiterals.StarImage.allCases[index].rawValue)
                                 .resizable()
                                 .scaledToFit()
                                 
-                            Image(systemName: "plus")
-                                .resizable()
-                                .fontWeight(.bold)
-                                .foregroundStyle(.white)
-                                .frame(width: 40, height: 40)
-                                .offset(y: 5)
+                            Image(.plus)
                         }
                     }
                     .frame(width: 160, height: 160)
                     
-                    Text("마케팅 실습 향상")
+                    Text(items.first?.starName[index] ?? "Error")
                         .font(.title3)
                         .bold()
                 }
