@@ -13,8 +13,11 @@ struct PlanetView: View {
     @Query var items: [Item]
     @State var selectedIndex: Int = 0
     @State private var selecttimer: Bool = false
-
+    @State var moveNextView: Bool = false
+    
     var body: some View {
+<<<<<<< Updated upstream
+        NavigationStack {
         ZStack(alignment: .bottom) {
             PlanetImage
             if selecttimer == false{
@@ -90,6 +93,7 @@ extension PlanetView {
     
     var ShoppingButton: some View {
         Button {
+            moveNextView = true
             print("move To shop")
         } label: {
             Image(systemName: "storefront.circle.fill")
