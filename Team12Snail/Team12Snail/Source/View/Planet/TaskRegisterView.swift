@@ -12,8 +12,9 @@ struct TaskRegisterView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Query var items: [Item]
     @Binding var selectedIndex: Int
-    @State var taskTitleText: String = ""
-    @State var taskCase: Int = 0
+    @Binding var showTimer: Bool
+    @Binding var taskTitleText: String
+    @Binding var taskCase: Int
     
     let buttonNames: [String] = ["Work", "Life"]
     
@@ -37,6 +38,9 @@ struct TaskRegisterView: View {
                     RegisterButton
                 }
             }
+        }
+        .onAppear {
+            taskTitleText = ""
         }
         .dismissKeyboard()
     }
@@ -120,7 +124,8 @@ extension TaskRegisterView {
     
     var RegisterButton: some View {
         Button {
-            print("regist")
+            showTimer = true
+            self.presentationMode.wrappedValue.dismiss()
         } label: {
             Text("등록")
                 .fontWeight(.semibold)

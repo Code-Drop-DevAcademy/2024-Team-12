@@ -11,18 +11,26 @@ import SwiftData
 struct PlanetView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var items: [Item]
-    @State var selectedIndex: Int = 0
-    @State var showRegisterSheet: Bool = false
+    
+    @State private var selectedIndex: Int = 0
+    @State private var showRegisterSheet: Bool = false
+    @State private var showTimer: Bool = false
+    @State private var taskTitleText: String = ""
+    @State private var taskCase: Int = 0
     
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
                 PlanetImage
-                StarSelectingView(selectedIndex: $selectedIndex, showRegisterSheet: $showRegisterSheet)
-                    .padding(.bottom, 30)
-                    .overlay {
-                        ChangeStarButton
-                    }
+                if showTimer {
+                    StopWatchView()
+                } else {
+                    StarSelectingView(selectedIndex: $selectedIndex, showRegisterSheet: $showRegisterSheet)
+                        .padding(.bottom, 30)
+                        .overlay {
+                            ChangeStarButton
+                        }
+                }
             }
             .overlay(alignment: .topTrailing) {
                 ShoppingButton
@@ -36,12 +44,14 @@ struct PlanetView: View {
                 }
             }
             .sheet(isPresented: $showRegisterSheet) {
-                TaskRegisterView(selectedIndex: $selectedIndex)
+                TaskRegisterView(selectedIndex: $selectedIndex,
+                                 showTimer: $showTimer,
+                                 taskTitleText: $taskTitleText,
+                                 taskCase: $taskCase)
             }
         }
     }
 }
-
 
 extension PlanetView {
     var PlanetImage: some View {
