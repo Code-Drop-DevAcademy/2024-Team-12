@@ -16,29 +16,32 @@ struct PlanetView: View {
     @State var moveNextView: Bool = false
     
     var body: some View {
-<<<<<<< Updated upstream
         NavigationStack {
-        ZStack(alignment: .bottom) {
-            PlanetImage
-            if selecttimer == false{
-                StarSelectingView(selectedIndex: $selectedIndex)
-                    .padding(.bottom, 30)
-                    .overlay {
-                        ChangeStarButton
+            ZStack(alignment: .bottom) {
+                PlanetImage
+                if selecttimer == false{
+                    StarSelectingView(selectedIndex: $selectedIndex)
+                        .padding(.bottom, 30)
+                        .overlay {
+                            ChangeStarButton
+                        }
+                }
+                if selecttimer == true{
+                    StopWatchView()
+                }
+            }
+            .overlay(alignment: .topTrailing) {
+                ShoppingButton
+                    .padding()
+                    .navigationDestination(isPresented: $moveNextView) {
+                        StoreView(items: items.first!)
                     }
             }
-            if selecttimer == true{
-                StopWatchView()
-            }
-        }
-        .overlay(alignment: .topTrailing) {
-            ShoppingButton
-                .padding()
-        }
-        .onAppear {
-            // 현재는 임시로 뷰 생성시 Items 임의로 생성되게 설정
-            if items.isEmpty {
-                initItems()
+            .onAppear {
+                // 현재는 임시로 뷰 생성시 Items 임의로 생성되게 설정
+                if items.isEmpty {
+                    initItems()
+                }
             }
         }
     }
