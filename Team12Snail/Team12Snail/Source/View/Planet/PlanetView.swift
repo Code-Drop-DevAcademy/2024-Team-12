@@ -12,15 +12,21 @@ struct PlanetView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var items: [Item]
     @State var selectedIndex: Int = 0
-    
+    @State private var selecttimer: Bool = false
+
     var body: some View {
         ZStack(alignment: .bottom) {
             PlanetImage
-            StarSelectingView(selectedIndex: $selectedIndex)
-                .padding(.bottom, 30)
-                .overlay {
-                    ChangeStarButton
-                }
+            if selecttimer == false{
+                StarSelectingView(selectedIndex: $selectedIndex)
+                    .padding(.bottom, 30)
+                    .overlay {
+                        ChangeStarButton
+                    }
+            }
+            if selecttimer == true{
+                StopWatchView()
+            }
         }
         .overlay(alignment: .topTrailing) {
             ShoppingButton
@@ -34,6 +40,16 @@ struct PlanetView: View {
         }
     }
 }
+
+extension StopWatchView {
+    var StopWatchImage: some View{
+        Image(.imageDummyPlanet)
+            .resizable()
+            .scaledToFill()
+            .clipped()
+    }
+}
+
 
 
 extension PlanetView {
