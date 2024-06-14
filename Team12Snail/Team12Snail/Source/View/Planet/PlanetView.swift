@@ -13,18 +13,20 @@ struct PlanetView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             PlanetImage
-            StarSelectingView(selectedIndex: $selectedIndex)
-                .padding(.bottom, 30)
-                .overlay {
-                   ChangeStarButton
-                }
-        }
-        .overlay(alignment: .topTrailing) {
-            ShoppingButton
-                .padding()
+            StopWatchView()
         }
     }
 }
+
+extension StopWatchView {
+    var StopWatchImage: some View{
+        Image(.imageDummyPlanet)
+            .resizable()
+            .scaledToFill()
+            .clipped()
+    }
+}
+
 
 
 extension PlanetView {
