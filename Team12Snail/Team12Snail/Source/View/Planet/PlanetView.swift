@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PlanetView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query var items: [Item]
     @State var selectedIndex: Int = 0
     
     var body: some View {
@@ -16,12 +19,18 @@ struct PlanetView: View {
             StarSelectingView(selectedIndex: $selectedIndex)
                 .padding(.bottom, 30)
                 .overlay {
-                   ChangeStarButton
+                    ChangeStarButton
                 }
         }
         .overlay(alignment: .topTrailing) {
             ShoppingButton
                 .padding()
+        }
+        .onAppear {
+            // 현재는 임시로 뷰 생성시 Items 임의로 생성되게 설정
+            if items.isEmpty {
+                initItems()
+            }
         }
     }
 }
@@ -77,4 +86,28 @@ extension PlanetView {
 
 #Preview {
     PlanetView()
+}
+
+extension PlanetView {
+    
+    // 원래는 온보딩 뷰에서 불러와야하는 메소드
+    func initItems() {
+        let item = Item(
+            starName: [0:"첫번째", 1:"두번째", 2:"세번째", 3:"네번째"],
+            starPoint: [0:0, 1:0, 2:0, 3:0],
+            selectedItems: [0 : "pencil", 1 : "eraser", 2 : "paperplane.fill", 3 : "doc.fill"],
+            purchasedItems: [
+                0 : [],
+                1 : [],
+                2 : [],
+                3 : []
+            ])
+        modelContext.insert(item)
+        
+        do {
+            try modelContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
