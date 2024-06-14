@@ -10,9 +10,13 @@ import SwiftData
 
 @Model
 final class Item {
-    var timestamp: Date
+    var starPoint: [Int : Int]
+    var selectedItems: [Int : String]
+    var purchasedItems: [Int : [String]]
     
-    init(timestamp: Date) {
-        self.timestamp = timestamp
+    init(starPoint: [Int : Int], selectedItems: [Int : String], purchasedItems: [Int : [String]]) {
+        self.starPoint = starPoint
+        self.selectedItems = selectedItems
+        self.purchasedItems = purchasedItems
     }
 }
