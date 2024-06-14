@@ -19,7 +19,7 @@ struct PlanetView: View {
             StarSelectingView(selectedIndex: $selectedIndex)
                 .padding(.bottom, 30)
                 .overlay {
-                   ChangeStarButton
+                    ChangeStarButton
                 }
         }
         .overlay(alignment: .topTrailing) {
@@ -92,7 +92,8 @@ extension PlanetView {
     
     // 원래는 온보딩 뷰에서 불러와야하는 메소드
     func initItems() {
-        let task = Item(
+        let item = Item(
+            starName: [0:"첫번째", 1:"두번째", 2:"세번째", 3:"네번째"],
             starPoint: [0:0, 1:0, 2:0, 3:0],
             selectedItems: [0 : "pencil", 1 : "eraser", 2 : "paperplane.fill", 3 : "doc.fill"],
             purchasedItems: [
@@ -101,7 +102,7 @@ extension PlanetView {
                 2 : [],
                 3 : []
             ])
-        modelContext.insert(task)
+        modelContext.insert(item)
         
         do {
             try modelContext.save()
