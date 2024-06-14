@@ -9,7 +9,19 @@ import SwiftUI
 
 struct PlanetView: View {
     var body: some View {
-        Text("Hello, World!")
+        ZStack {
+            PlanetImage
+        }
+    }
+}
+
+
+extension PlanetView {
+    var PlanetImage: some View {
+        Image(.imageDummyPlanet)
+            .resizable()
+            .scaledToFill()
+            .clipped()
     }
 }
 
