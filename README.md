@@ -21,11 +21,8 @@ Attach videos if you are available
 <div>
 <img src="https://img.shields.io/badge/swift-F05138?style=for-the-badge&logo=swift&logoColor=white">
 <img src="https://img.shields.io/badge/swiftUI-F05138?style=for-the-badge&logo=swift&logoColor=white">
-<img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white">
-<img src="https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white">
 <img width="80" src="https://img.shields.io/badge/IOS-17%2B-yellow"> <img width="95" src="https://img.shields.io/badge/Xcode-15.3-blue">
 <div>
 
 ## :people_hugging:  Authors
-|:-:|:-:|:-:|:-:|:-:|:-:|
 |[박하연(Harae)](https://github.com/HaraePark)|[이윤학(Nagi)](https://github.com/Naknakk)|[남동현(Namudi)](https://github.com/namudongs)|[임유리(Hera)](https://github.com/heracloud)|[박혜지(Hedy)](https://github.com/hyeparkc)|
