@@ -37,6 +37,7 @@ struct StopWatchView: View {
     @Binding var selectedTask: Task
     @Binding var taskTitleText: String
     @Binding var isTimerRunning: Bool
+    @Binding var showTimer: Bool
     @State private var showResultAlert: Bool = false
     @State private var starCount: Int = 0
     
@@ -117,9 +118,11 @@ struct StopWatchView: View {
                         }
                 }
             }
-            .alert("\(items.first?.starName[selectedIndex] ?? "오류") 별사탕 \(starCount)개를 획득했어요!", isPresented: $showResultAlert) {
-                Button("멋져요", role: nil) { }
-            }
+            .alert(isPresented: $showResultAlert) {
+                        Alert(title: Text("\(items.first?.starName[selectedIndex] ?? "오류") 별사탕"),
+                              message: Text("별사탕 \(starCount)개를 획득했습니다!"),
+                              dismissButton: .default(Text("확인"), action: { showTimer = false }))
+                    }
         }
     }
 }

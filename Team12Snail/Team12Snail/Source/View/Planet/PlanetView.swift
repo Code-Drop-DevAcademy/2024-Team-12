@@ -32,7 +32,8 @@ struct PlanetView: View {
                     StopWatchView(selectedIndex: $selectedIndex,
                                   selectedTask: $selectedTask,
                                   taskTitleText: $taskTitleText,
-                                  isTimerRunning: $isTimerRunning)
+                                  isTimerRunning: $isTimerRunning,
+                                  showTimer: $showTimer)
                     .padding(.bottom, 60)
                 } else {
                     StarSelectingView(selectedIndex: $selectedIndex, showRegisterSheet: $showRegisterSheet)

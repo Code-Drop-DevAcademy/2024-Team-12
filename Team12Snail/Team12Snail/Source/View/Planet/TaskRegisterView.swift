@@ -55,15 +55,17 @@ extension TaskRegisterView {
                     .scaledToFit()
                     .frame(width: 45, height: 45)
                 Text(items.first?.starName[selectedIndex] ?? "Error")
+                    .foregroundStyle(.white)
+                    .font(.subheadline)
             }
-            .padding(.top, 10)
-            .padding(.bottom, 20)
+            .padding(.top, 16)
+            .padding(.bottom, 16)
             
             Spacer()
         }
         .background {
             RoundedRectangle(cornerRadius: 9)
-                .foregroundStyle(.gray)
+                .foregroundStyle(.black)
         }
     }
     
@@ -71,7 +73,7 @@ extension TaskRegisterView {
         VStack(alignment: .leading, spacing: 8) {
             Text("테스크 제목")
                 .font(.headline)
-            TextField("테스크 제목을 입력하세요", text: $taskTitleText)
+            TextField("Task 제목을 입력하세요", text: $taskTitleText)
                 .padding(.vertical, 12)
                 .padding(.horizontal, 8)
                 .clipShape(RoundedRectangle(cornerRadius: 9))
