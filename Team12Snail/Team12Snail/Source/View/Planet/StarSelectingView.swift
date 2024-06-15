@@ -39,8 +39,9 @@ struct StarSelectingView: View {
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        .tint(.black)
         .animation(.snappy, value: selectedIndex)
-        .frame(height: UIScreen.main.bounds.height/2)
+        .frame(height: 350)
     }
 }
 

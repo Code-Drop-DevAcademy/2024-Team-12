@@ -27,7 +27,7 @@ struct PlanetView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                PlanetImage
+                PlanetImageView()
                 if showTimer {
                     StopWatchView(selectedIndex: $selectedIndex,
                                   selectedTask: $selectedTask,
@@ -78,30 +78,17 @@ extension PlanetView {
     
     var ChangeStarButton: some View {
         HStack {
-            Button {
-                if selectedIndex > 0 {
-                    selectedIndex -= 1
-                }
-                print(selectedIndex)
-            } label: {
-                Image(systemName: "chevron.left")
-                    .font(.largeTitle)
-                    .shadow(radius: 4, y: 4)
-                    .padding()
-            }
-            .tint(.white)
+            Image(systemName: "chevron.left")
+                .font(.largeTitle)
+                .shadow(radius: 4, y: 4)
+                .padding()
+                .foregroundStyle(.white)
             Spacer()
-            Button {
-                if selectedIndex < 3 {
-                    selectedIndex += 1
-                }
-            } label: {
-                Image(systemName: "chevron.right")
-                    .font(.largeTitle)
-                    .shadow(radius: 4, y: 4)
-                    .padding()
-            }
-            .tint(.white)
+            Image(systemName: "chevron.right")
+                .font(.largeTitle)
+                .shadow(radius: 4, y: 4)
+                .padding()
+                .foregroundStyle(.white)
         }
         .padding(8)
     }
@@ -150,12 +137,12 @@ extension PlanetView {
         let item = Item(
             starName: [0:"첫번째", 1:"두번째", 2:"세번째", 3:"네번째"],
             starPoint: [0:0, 1:0, 2:0, 3:0],
-            selectedItems: [0 : "pencil", 1 : "eraser", 2 : "paperplane.fill", 3 : "doc.fill"],
+            selectedItems: [0 : "PersonWithDefault", 1 : "", 2 : "DefaultPlanet", 3 : "DefaultBackground"],
             purchasedItems: [
-                0 : [],
+                0 : ["PersonWithDefault"],
                 1 : [],
-                2 : [],
-                3 : []
+                2 : ["DefaultPlanet"],
+                3 : ["DefaultBackground"]
             ])
         modelContext.insert(item)
         
