@@ -83,7 +83,7 @@ extension PlanetView {
                     selectedIndex -= 1
                 }
                 // 0.5초 후에 버튼을 다시 활성화
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     isButtonDisabled = false
                 }
             } label: {
@@ -101,7 +101,7 @@ extension PlanetView {
                 if selectedIndex < 3 {
                     selectedIndex += 1
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     isButtonDisabled = false
                 }
             } label: {

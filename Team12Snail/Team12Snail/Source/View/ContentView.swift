@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isOnboarding: Bool = false
+    @State var isOnboarding: Bool = true
     
     var body: some View {
         if isOnboarding {
