@@ -29,4 +29,6 @@ Attach videos if you are available
 <div>
 
 ## :people_hugging:  Authors
+|<img width="308" alt="스크린샷 2024-05-13 오후 4 45 43" src="https://github.com/DeveloperAcademy-POSTECH/MC2-Team18-DDooing/assets/166782425/cfee305b-1ec7-4e8f-b38e-6977233f5558">|![87518742](https://github.com/Code-Drop-DevAcademy/2024-Team-12/assets/166782425/cf547044-20eb-4cd0-bb95-5b7daadcb083)|![85597534](https://github.com/Code-Drop-DevAcademy/2024-Team-12/assets/166782425/fed93f2b-66e8-4941-9a19-900b8ff5e5cf)|![167537498](https://github.com/Code-Drop-DevAcademy/2024-Team-12/assets/166782425/b6881f3c-fc78-4944-990a-d56b3d731933)||
+|:-:|:-:|:-:|:-:|:-:|:-:|
 |[박하연(Harae)](https://github.com/HaraePark)|[이윤학(Nagi)](https://github.com/Naknakk)|[남동현(Namudi)](https://github.com/namudongs)|[임유리(Hera)](https://github.com/heracloud)|[박혜지(Hedy)](https://github.com/hyeparkc)|
