@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isOnboarding: Bool = true
+    
     var body: some View {
-        PlanetView()
-        //StopWatchView()
+        if isOnboarding {
+            OnboardingView(isOnboarding: $isOnboarding)
+        } else {
+            PlanetView()
+        }
     }
 }
 

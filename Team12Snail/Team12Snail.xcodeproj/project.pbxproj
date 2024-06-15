@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3911FDEC2C1D28DA000F472C /* PlanetImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911FDEB2C1D28DA000F472C /* PlanetImageView.swift */; };
 		39E374AA2C1CD02300BAB64B /* Team12SnailApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374A92C1CD02300BAB64B /* Team12SnailApp.swift */; };
 		39E374AC2C1CD02300BAB64B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374AB2C1CD02300BAB64B /* ContentView.swift */; };
 		39E374AE2C1CD02300BAB64B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374AD2C1CD02300BAB64B /* Item.swift */; };
@@ -18,10 +19,13 @@
 		39E374D52C1CD5F200BAB64B /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374D42C1CD5F200BAB64B /* StoreView.swift */; };
 		39E374D82C1CD64B00BAB64B /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374D72C1CD64B00BAB64B /* View+.swift */; };
 		39E374DA2C1CEFAD00BAB64B /* StarSelectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374D92C1CEFAD00BAB64B /* StarSelectingView.swift */; };
+		39E374DF2C1CF91A00BAB64B /* TaskRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E374DE2C1CF91A00BAB64B /* TaskRegisterView.swift */; };
 		98A31B4E2C1CFB0400F769B4 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A31B4D2C1CFB0400F769B4 /* TimerView.swift */; };
+		98A31B502C1D06B400F769B4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A31B4F2C1D06B400F769B4 /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3911FDEB2C1D28DA000F472C /* PlanetImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetImageView.swift; sourceTree = "<group>"; };
 		39E374A62C1CD02300BAB64B /* Team12Snail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Team12Snail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39E374A92C1CD02300BAB64B /* Team12SnailApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team12SnailApp.swift; sourceTree = "<group>"; };
 		39E374AB2C1CD02300BAB64B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,7 +38,9 @@
 		39E374D42C1CD5F200BAB64B /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		39E374D72C1CD64B00BAB64B /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		39E374D92C1CEFAD00BAB64B /* StarSelectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarSelectingView.swift; sourceTree = "<group>"; };
+		39E374DE2C1CF91A00BAB64B /* TaskRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRegisterView.swift; sourceTree = "<group>"; };
 		98A31B4D2C1CFB0400F769B4 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		98A31B4F2C1D06B400F769B4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,9 @@
 				39E374D22C1CD5CB00BAB64B /* PlanetView.swift */,
 				98A31B4D2C1CFB0400F769B4 /* TimerView.swift */,
 				39E374D92C1CEFAD00BAB64B /* StarSelectingView.swift */,
+				39E374DE2C1CF91A00BAB64B /* TaskRegisterView.swift */,
+				3911FDEB2C1D28DA000F472C /* PlanetImageView.swift */,
+				98A31B4F2C1D06B400F769B4 /* OnboardingView.swift */,
 			);
 			path = Planet;
 			sourceTree = "<group>";
@@ -242,12 +251,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39E374DF2C1CF91A00BAB64B /* TaskRegisterView.swift in Sources */,
 				98A31B4E2C1CFB0400F769B4 /* TimerView.swift in Sources */,
 				39E374AC2C1CD02300BAB64B /* ContentView.swift in Sources */,
 				39E374AE2C1CD02300BAB64B /* Item.swift in Sources */,
+				98A31B502C1D06B400F769B4 /* OnboardingView.swift in Sources */,
 				39E374CB2C1CD43600BAB64B /* StringLiterals.swift in Sources */,
 				39E374AA2C1CD02300BAB64B /* Team12SnailApp.swift in Sources */,
 				39E374D82C1CD64B00BAB64B /* View+.swift in Sources */,
+				3911FDEC2C1D28DA000F472C /* PlanetImageView.swift in Sources */,
 				39E374DA2C1CEFAD00BAB64B /* StarSelectingView.swift in Sources */,
 				39E374D52C1CD5F200BAB64B /* StoreView.swift in Sources */,
 				39E374D32C1CD5CB00BAB64B /* PlanetView.swift in Sources */,
