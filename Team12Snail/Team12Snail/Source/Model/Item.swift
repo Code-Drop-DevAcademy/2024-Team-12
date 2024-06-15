@@ -58,3 +58,9 @@ final class Item {
         self.purchasedItems = purchasedItems
     }
 }
+
+struct StoreItem: Hashable {
+    var index: Int
+    var imageName: String
+    var price: Int
+}

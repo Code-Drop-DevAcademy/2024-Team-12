@@ -13,24 +13,30 @@ struct PlanetView: View {
     @Query var items: [Item]
     @State var selectedIndex: Int = 0
     @State private var selecttimer: Bool = false
-
+    @State var moveNextView: Bool = false
+    
     var body: some View {
-        ZStack(alignment: .bottom) {
-            PlanetImage
-            if selecttimer == false{
-                StarSelectingView(selectedIndex: $selectedIndex)
-                    .padding(.bottom, 30)
-                    .overlay {
-                        ChangeStarButton
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                PlanetImage
+                if selecttimer == false{
+                    StarSelectingView(selectedIndex: $selectedIndex)
+                        .padding(.bottom, 30)
+                        .overlay {
+                            ChangeStarButton
+                        }
+                }
+                if selecttimer == true{
+                    StopWatchView()
+                }
+            }
+            .overlay(alignment: .topTrailing) {
+                ShoppingButton
+                    .padding()
+                    .navigationDestination(isPresented: $moveNextView) {
+                        StoreView(items: items.first ?? Item(starName: [:], starPoint: [:], selectedItems: [:], purchasedItems: [:]))
                     }
             }
-            if selecttimer == true{
-                StopWatchView()
-            }
-        }
-        .overlay(alignment: .topTrailing) {
-            ShoppingButton
-                .padding()
         }
     }
 }
@@ -84,6 +90,7 @@ extension PlanetView {
     
     var ShoppingButton: some View {
         Button {
+            moveNextView = true
             print("move To shop")
         } label: {
             Image(systemName: "storefront.circle.fill")
