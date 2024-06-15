@@ -9,16 +9,16 @@ import SwiftUI
 
 struct StoreView: View {
     @State private var storeItems: [StoreItem] = [
-        StoreItem(index: 0, imageName: "1", price: 14),
-        StoreItem(index: 1, imageName: "2", price: 17),
-        StoreItem(index: 1, imageName: "3", price: 24),
-        StoreItem(index: 1, imageName: "4", price: 21),
-        StoreItem(index: 1, imageName: "5", price: 36),
-        StoreItem(index: 1, imageName: "6", price: 11),
-        StoreItem(index: 2, imageName: "7", price: 4),
-        StoreItem(index: 2, imageName: "8", price: 19),
-        StoreItem(index: 3, imageName: "9", price: 33),
-        StoreItem(index: 3, imageName: "10", price: 29)
+        StoreItem(index: 0, imageName: "Default", price: 14),
+        StoreItem(index: 0, imageName: "Glasses", price: 5),
+        StoreItem(index: 0, imageName: "Suit", price: 17),
+        StoreItem(index: 1, imageName: "Cat", price: 17),
+        StoreItem(index: 1, imageName: "Fly", price: 24),
+        StoreItem(index: 1, imageName: "Snake", price: 21),
+        StoreItem(index: 2, imageName: "DefaultPlanet", price: 14),
+        StoreItem(index: 2, imageName: "NewPlanet", price: 4),
+        StoreItem(index: 3, imageName: "DefaultBackground", price: 33),
+        StoreItem(index: 3, imageName: "NewBackground", price: 29)
     ]
     
     @State private var selectedCategory: Int = 0
@@ -28,7 +28,7 @@ struct StoreView: View {
         GeometryReader { geo in
             VStack(spacing: 0) {
                 ZStack {
-                    PlanetView().PlanetImage
+                    PlanetImageView(characterSize: 150, characterPosition: -60)
                         .frame(width: geo.size.width, height: geo.size.height / 2)
                         .mask {
                             Rectangle()
@@ -82,9 +82,7 @@ struct StoreDetailView: View {
                             }
                         }
                         .onTapGesture {
-                            withAnimation {
-                                selectedCategory = index
-                            }
+                            selectedCategory = index
                         }
                         .opacity(selectedCategory == index ? 1.0 : 0.3)
                     Spacer().frame(width: 3)
@@ -100,7 +98,7 @@ struct StoreDetailView: View {
                         let purchased = item.purchasedItems[selectedCategory]?.contains(value.imageName) ?? false
                         let selected = item.selectedItems[selectedCategory] == value.imageName
                         VStack {
-                            Circle().frame(width: 60)
+                            Image(value.imageName).resizable().scaledToFit().frame(width: 60, height: 60)
                             HStack {
                                 if selected {
                                     Text("적용 중").font(.system(size: 15, weight: .semibold))

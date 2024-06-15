@@ -24,21 +24,22 @@ struct PlanetView: View {
     @State private var taskTitleText: String = ""
     @State private var selectedTask: Task = .work
     @State var moveNextView: Bool = false
+    @State var isButtonDisabled: Bool = false
     
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                PlanetImageView()
+                PlanetImageView(characterSize: 270, characterPosition: -110)
                 if showTimer {
                     StopWatchView(selectedIndex: $selectedIndex,
                                   selectedTask: $selectedTask,
                                   taskTitleText: $taskTitleText,
                                   isTimerRunning: $isTimerRunning,
                                   showTimer: $showTimer)
-                    .padding(.bottom, 60)
+                    .padding(.bottom, 30)
                 } else {
-                    StarSelectingView(selectedIndex: $selectedIndex, showRegisterSheet: $showRegisterSheet)
-                        .padding(.bottom, 30)
+                    StarSelectingView(selectedIndex: $selectedIndex, showRegisterSheet: $showRegisterSheet, isButtonDisabled: $isButtonDisabled)
+                        .padding(.bottom, 10)
                         .overlay {
                             ChangeStarButton
                         }
@@ -48,7 +49,7 @@ struct PlanetView: View {
                 VStack(spacing: 4) {
                     ShoppingButton
                         .padding(.trailing, 16)
-                        .padding(.top, 40)
+                        .padding(.top, 16)
                     CurrentStar
                         .padding(.trailing, 16)
                 }
@@ -76,17 +77,41 @@ extension PlanetView {
     
     var ChangeStarButton: some View {
         HStack {
-            Image(systemName: "chevron.left")
-                .font(.largeTitle)
-                .shadow(radius: 4, y: 4)
-                .padding()
-                .foregroundStyle(.white)
+            Button {
+                isButtonDisabled = true
+                if selectedIndex > 0 {
+                    selectedIndex -= 1
+                }
+                // 0.5초 후에 버튼을 다시 활성화
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    isButtonDisabled = false
+                }
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.largeTitle)
+                    .shadow(radius: 4, y: 4)
+                    .padding()
+                    .foregroundStyle(.white)
+            }
+            .disabled(isButtonDisabled)
+            
             Spacer()
-            Image(systemName: "chevron.right")
-                .font(.largeTitle)
-                .shadow(radius: 4, y: 4)
-                .padding()
-                .foregroundStyle(.white)
+            Button {
+                isButtonDisabled = true
+                if selectedIndex < 3 {
+                    selectedIndex += 1
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    isButtonDisabled = false
+                }
+            } label: {
+                Image(systemName: "chevron.right")
+                    .font(.largeTitle)
+                    .shadow(radius: 4, y: 4)
+                    .padding()
+                    .foregroundStyle(.white)
+            }
+            .disabled(isButtonDisabled)
         }
         .padding(8)
     }
@@ -128,5 +153,5 @@ extension PlanetView {
 
 #Preview {
     PlanetView()
-
+    
 }

@@ -13,7 +13,7 @@ struct StarSelectingView: View {
     
     @Binding var selectedIndex: Int
     @Binding var showRegisterSheet: Bool
-    
+    @Binding var isButtonDisabled: Bool
     var body: some View {
         TabView(selection: $selectedIndex) {
             ForEach(0..<4, id: \.self) { index in
@@ -31,6 +31,7 @@ struct StarSelectingView: View {
                         }
                     }
                     .frame(width: 160, height: 160)
+                    .disabled(isButtonDisabled)
                     
                     Text(items.first?.starName[index] ?? "Error")
                         .font(.title3)
