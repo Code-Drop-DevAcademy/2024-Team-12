@@ -8,6 +8,10 @@
 import SwiftUI
 import SwiftData
 
+enum Field {
+    case name
+}
+
 struct TaskRegisterView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Query var items: [Item]
@@ -15,6 +19,7 @@ struct TaskRegisterView: View {
     @Binding var showTimer: Bool
     @Binding var taskTitleText: String
     @Binding var selectedTask: Task
+    @FocusState private var focusField: Field?
     
     var body: some View {
         NavigationStack {
@@ -39,6 +44,7 @@ struct TaskRegisterView: View {
         }
         .onAppear {
             taskTitleText = ""
+            focusField = .name
         }
         .dismissKeyboard()
     }
@@ -57,6 +63,7 @@ extension TaskRegisterView {
                 Text(items.first?.starName[selectedIndex] ?? "Error")
                     .foregroundStyle(.white)
                     .font(.subheadline)
+                    .bold()
             }
             .padding(.top, 16)
             .padding(.bottom, 16)
@@ -82,6 +89,7 @@ extension TaskRegisterView {
                         .stroke(lineWidth: 1)
                         .foregroundStyle(.black.opacity(0.5))
                 }
+                .focused($focusField, equals: .name)
         }
     }
     
