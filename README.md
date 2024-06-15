@@ -1,10 +1,14 @@
 # TEAM 달팽이🐌
 
 ## Work-Life Collaboration
+# :iphone: Plan It (플래닛)
+![cover](https://github.com/Code-Drop-DevAcademy/2024-Team-12/assets/166782425/ce0aa7bf-1664-43bb-80a7-e29cf5a504b0)
 
 업무적 요소와 일상적 요소를 연결지어 자아실현을 도와주자.<br>
 > 일과 일상 두가지 영역 모두에서 본인의 자아실현을 이루고 싶은 유저가,
 > 자아실현의 요소를 Work-Life 구분 없이 두가지 영역의 테스크에 모두 연결지어 키워나감으로써 Work-Life Collaboration을 실현할 수 있도록 도와주는 앱입니다.
+> 
+<img width="710" alt="스크린샷 2024-06-15 오후 12 23 21" src="https://github.com/Code-Drop-DevAcademy/2024-Team-12/assets/166782425/6e1f1bef-d9a5-4eb2-adbb-9d6614a60fad">
 
 ## :framed_picture: Demo (optional)
 
