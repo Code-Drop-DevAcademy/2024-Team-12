@@ -34,7 +34,7 @@ struct PlanetView: View {
                 ShoppingButton
                     .padding()
                     .navigationDestination(isPresented: $moveNextView) {
-                        StoreView(items: items.first!)
+                        StoreView(items: items.first ?? Item(starName: [:], starPoint: [:], selectedItems: [:], purchasedItems: [:]))
                     }
             }
             .onAppear {
