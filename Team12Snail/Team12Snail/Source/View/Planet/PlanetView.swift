@@ -23,6 +23,7 @@ struct PlanetView: View {
     @State private var isTimerRunning: Bool = false
     @State private var taskTitleText: String = ""
     @State private var selectedTask: Task = .work
+    @State var moveNextView: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -52,17 +53,14 @@ struct PlanetView: View {
                         .padding(.trailing, 16)
                 }
             }
-            .onAppear {
-                // 현재는 임시로 뷰 생성시 Items 임의로 생성되게 설정
-                if items.isEmpty {
-                    initItems()
-                }
-            }
             .sheet(isPresented: $showRegisterSheet) {
                 TaskRegisterView(selectedIndex: $selectedIndex,
                                  showTimer: $showTimer,
                                  taskTitleText: $taskTitleText,
                                  selectedTask: $selectedTask)
+            }
+            .navigationDestination(isPresented: $moveNextView) {
+                StoreView(items: items.first ?? Item(starName: [:], starPoint: [:], selectedItems: [:], purchasedItems: [:]))
             }
         }
     }
@@ -95,6 +93,7 @@ extension PlanetView {
     
     var ShoppingButton: some View {
         Button {
+            moveNextView = true
             print("move To shop")
         } label: {
             Image(systemName: "storefront.circle.fill")
@@ -126,30 +125,8 @@ extension PlanetView {
     }
 }
 
-//#Preview {
-//    PlanetView()
-//}
 
-extension PlanetView {
-    
-    // 원래는 온보딩 뷰에서 불러와야하는 메소드
-    func initItems() {
-        let item = Item(
-            starName: [0:"첫번째", 1:"두번째", 2:"세번째", 3:"네번째"],
-            starPoint: [0:0, 1:0, 2:0, 3:0],
-            selectedItems: [0 : "PersonWithDefault", 1 : "", 2 : "DefaultPlanet", 3 : "DefaultBackground"],
-            purchasedItems: [
-                0 : ["PersonWithDefault"],
-                1 : [],
-                2 : ["DefaultPlanet"],
-                3 : ["DefaultBackground"]
-            ])
-        modelContext.insert(item)
-        
-        do {
-            try modelContext.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
+#Preview {
+    PlanetView()
+
 }
