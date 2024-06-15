@@ -14,9 +14,7 @@ struct TaskRegisterView: View {
     @Binding var selectedIndex: Int
     @Binding var showTimer: Bool
     @Binding var taskTitleText: String
-    @Binding var taskCase: Int
-    
-    let buttonNames: [String] = ["Work", "Life"]
+    @Binding var selectedTask: Task
     
     var body: some View {
         NavigationStack {
@@ -91,19 +89,19 @@ extension TaskRegisterView {
                 .font(.headline)
             
             HStack(spacing: 10) {
-                ForEach(0..<2) { i in
+                ForEach(Task.allCases, id: \.self) { task in
                     Button {
-                        taskCase = i
+                        selectedTask = task
                     } label: {
                         HStack {
                             Spacer()
-                            Text(buttonNames[i])
+                            Text(task.rawValue)
                                 .bold()
-                                .foregroundStyle(i == taskCase ? .white : .black.opacity(0.5))
+                                .foregroundStyle(selectedTask == task ? .white : .black.opacity(0.5))
                             Spacer()
                         }
                         .padding(.vertical, 8)
-                        .background(i == taskCase ? Color.black : Color.white)
+                        .background(selectedTask == task ? Color.black : Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 7))
                         .overlay {
                             RoundedRectangle(cornerRadius: 7).stroke(.black.opacity(0.5), lineWidth: 1.0)

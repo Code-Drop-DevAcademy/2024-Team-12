@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 class StopWatchManager: ObservableObject {
     @Published var counter: Double = 0.0
-    @Published var starcount: Double = 0.0
+    
     var timer = Timer()
     
     func start() {
@@ -22,103 +23,103 @@ class StopWatchManager: ObservableObject {
     func stop() {
         // 타이머 중지
         self.timer.invalidate()
-        //print( self.counter / 10.0) //10초에 1개로 계산되도록 처리
-        //starcount = self.counter / 10.0
-        print("**")
-        print(starcount)
-        print("**")
-        //MARK: - 업무적 / 일상적 분류해서 별사탕 개수 처리
     }
     
     func reset() {
-        // 타이머 중지 및 초기화
         self.timer.invalidate()
         self.counter = 0.0
     }
-    
 }
 
 struct StopWatchView: View {
     @StateObject var stopWatchManager = StopWatchManager()
-    @State private var buttoncontrol: Bool = false
-
+    @Binding var selectedIndex: Int
+    @Binding var selectedTask: Task
+    @Binding var taskTitleText: String
+    @Binding var isTimerRunning: Bool
+    @State private var showResultAlert: Bool = false
+    @State private var starCount: Int = 0
+    
+    @Query var items: [Item]
+    
     var body: some View {
-        //Spacer()
-        ZStack{
-            VStack{
-                Image("star")
-                
-                VStack{
-                    Text("work")
-                        .frame(width: 50, height: 15)
-                        .padding()
-                        .background(Color.yellow)
-                        .cornerRadius(50)
-                    
-                    Text("SNS 광고 레퍼런스 탐색하기")
-                        .font(.title3)
-                        .bold()
-                    
-                    VStack {
-                        // 타이머 값 표시 레이블
-                        Text(String(format: "%.2f", stopWatchManager.counter))
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .padding()
-                        
-                        HStack {
-                            // 타이머 시작 버튼
-                            if buttoncontrol == false {
-                                Button(action: {
-                                    self.stopWatchManager.start()
-                                    buttoncontrol = true
-                                    print(buttoncontrol)
-                                }) {
-                                    //Text("􀊖")
-                                    Image(systemName: "play.circle")
-                                        .foregroundColor(.black)
-                                        .font(.largeTitle)
-                                }
-                            }
-                            
-                            // 타이머 중지 버튼
-                            if buttoncontrol == true {
-                                Button(action: {
-                                    buttoncontrol = false
-                                    self.stopWatchManager.stop()
-                                    print(buttoncontrol)
-                                    
-                                }) {
-                                    //Text("􀜪")
-                                    Image(systemName: "pause.fill")
-                                        .foregroundColor(.black)
-                                        .font(.largeTitle)
-                                }
-                            }
-                            
-                            Button(action: {
-                                //self.stopWatchManager.reset()
-                                //print(starcount)
-                                print("별사탕 개수")
-                                //starcount = self.counter / 10.0
-                                print(Int(stopWatchManager.counter / 10.0))
-                                print("별사탕 개수")
-                            }) {
-                                //Text("􁣛")
-                                Image(systemName: "checkmark.circle")
-                                    .foregroundColor(.black)
-                                    .font(.largeTitle)
-                            }
+        VStack(spacing: 0) {
+            Image(StringLiterals.StarImage.allCases[selectedIndex].rawValue)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 45, height: 45)
+            
+            Spacer().frame(height: 14)
+            
+            Text(selectedTask.rawValue)
+                .font(.body)
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
+                .padding(8)
+                .padding(.horizontal, 8)
+                .background(Color.black)
+                .clipShape(RoundedRectangle(cornerRadius: 33))
+            
+            Spacer().frame(height: 8)
+            
+            Text(taskTitleText)
+                .font(.title3)
+                .bold()
+            
+            Spacer().frame(height: 16)
+            
+            Text(String(format: "%.2f", stopWatchManager.counter))
+                .font(.system(size: 48, weight: .bold))
+            
+            Spacer().frame(height: 24)
+            
+            HStack(spacing: 18) {
+                Button {
+                    isTimerRunning.toggle()
+                } label: {
+                    Circle()
+                        .frame(width: 64, height: 64)
+                        .foregroundStyle(.black)
+                        .overlay {
+                            Image(systemName: isTimerRunning ? "pause.fill" : "play.circle")
+                                .font(.system(size: 32, weight: .regular))
+                                .foregroundColor(.white)
                         }
+                }
+                .onChange(of: isTimerRunning) { oldValue, newValue in
+                    newValue ? stopWatchManager.start() : stopWatchManager.stop()
+                }
+                
+                Button(action: {
+                    guard let starPoint = items.first?.starPoint[selectedIndex] else {
+                        return
                     }
+                    
+                    if selectedTask == .work {
+                        starCount = Int(stopWatchManager.counter / 10.0) * 2
+                        items.first?.starPoint[selectedIndex] = starPoint + Int(stopWatchManager.counter / 10.0) * 2
+                    } else {
+                        starCount = Int(stopWatchManager.counter / 10.0)
+                        items.first?.starPoint[selectedIndex] = starPoint + Int(stopWatchManager.counter / 10.0)
+                    }
+
+                    isTimerRunning = false
+                    stopWatchManager.reset()
+                    showResultAlert = true
+                }) {
+                    Circle()
+                        .frame(width: 64, height: 64)
+                        .foregroundStyle(.black)
+                        .overlay {
+                            Image(systemName: "checkmark.circle")
+                                .font(.system(size: 32, weight: .regular))
+                                .foregroundColor(.white)
+                        }
                 }
             }
+            .alert("\(items.first?.starName[selectedIndex] ?? "오류") 별사탕 \(starCount)개를 획득했어요!", isPresented: $showResultAlert) {
+                Button("멋져요", role: nil) { }
+            }
         }
-    }
-}
-
-struct StopWatchView_Previews: PreviewProvider {
-    static var previews: some View {
-        StopWatchView()
     }
 }
